@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: configMap
+metadata:
+  name: pod-config
+  label:
+    purpose: config
+    env: dev
+data:
+  COURSE: "DevOps With AWS"
+  DURATION: "120Hours"
+  TRAINER: "Sivakumar"
+  STUDENT: "Lakshminarasimha"  
+  
