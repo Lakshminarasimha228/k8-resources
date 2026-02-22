@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: nginx
   # deployment labels
-  labels: 
+  labels:
     purpose: deployment-demo
     project: roboshop
     app: nginx
-spec: 
-  replicas: 2
-  # these are the labels replica set use to create pod replicas, this should match pod labels
+spec:
+  replicas: 3
+  # These are the labels replica set use to create pod replicas, this should match pod labels
   selector:
     matchLabels:
       purpose: deployment-demo
       project: roboshop
       app: nginx
-# this is pod defination
+  # This is pod definition
   template:
     metadata:
       labels:
