@@ -11,3 +11,4 @@ spec:
   csi:
     driver: ebs.csi.aws.com
     volumeHandle: vol-03c604538dd7d2f41
+#   volumeAttributes:
