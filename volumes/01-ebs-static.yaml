@@ -26,7 +26,7 @@ spec:
     requests:
       storage: 15Gi
 ---
-apiVersion: v1
+aapiVersion: v1
 kind: Pod
 metadata:
   name: nginx
@@ -39,10 +39,10 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    volumeMounts:
+    volumeMounts: # docker run -v host-path:container-path
     - name: persistent-storage
       mountPath: /usr/share/nginx/html
-  volumes:    
+  volumes:
   - name: persistent-storage
     persistentVolumeClaim:
       claimName: ebs-static
