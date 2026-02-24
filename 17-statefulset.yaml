@@ -1,8 +1,8 @@
 apiVersion: v1
-kind: service
+kind: Service
 metadata:
   name: sc-headless-svc
-  labels: 
+  labels:
     purpose: statefulset
     project: roboshop
 spec:
@@ -15,31 +15,33 @@ spec:
     project: roboshop
 ---
 apiVersion: v1
-kind: service
+kind: Service
 metadata:
   name: sc-normal-svc
-  labels: 
+  labels:
     purpose: statefulset
     project: roboshop
 spec:
+  type: ClusterIP
   ports:
   - port: 80
+    targetPort: 80
     name: web
   selector:
     purpose: statefulset
-    project: roboshop    
+    project: roboshop
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sc-headless
 spec:
+  serviceName: sc-headless-svc
+  replicas: 3
   selector:
     matchLabels:
       purpose: statefulset
       project: roboshop
-  serviceName: "sc-headless-svc"
-  replicas: 3
   template:
     metadata:
       labels:
@@ -49,6 +51,9 @@ spec:
       containers:
       - name: nginx
         image: nginx
+        ports:
+        - containerPort: 80
+          name: web
         volumeMounts:
         - name: www
           mountPath: /usr/share/nginx/html
@@ -56,10 +61,9 @@ spec:
   - metadata:
       name: www
     spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "efs-roboshop"
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: efs-roboshop
       resources:
         requests:
           storage: 2Gi
-
-    
