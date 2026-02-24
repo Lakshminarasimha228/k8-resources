@@ -52,7 +52,7 @@ spec:
         volumeMounts:
         - name: www
           mountPath: /usr/share/nginx/html
-  volumesClaimTemplates:
+  volumeClaimTemplates:
   - metadata:
       name: www
     spec:
